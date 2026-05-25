@@ -12,6 +12,7 @@
   --green: #2d8a54;
   --blue: #315f9f;
   --shadow: 0 12px 34px rgba(37, 31, 20, 0.1);
+  --table-min-width: 520px;
 }
 
 * {
@@ -505,7 +506,10 @@ h3 {
 }
 
 .transaction-heading {
-  align-items: end;
+  align-items: start;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-width: var(--table-min-width);
 }
 
 .table-search {
@@ -770,6 +774,14 @@ select:focus {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.player-shell .panel-heading > div {
+  min-width: 0;
+}
+
+.player-shell .panel-heading h2 {
+  overflow-wrap: anywhere;
 }
 
 .dashboard-grid {
@@ -1146,29 +1158,35 @@ select:focus {
 
 table {
   width: 100%;
-  min-width: 520px;
+  min-width: var(--table-min-width);
   border-collapse: collapse;
 }
 
 .players-compact-table {
-  min-width: 220px;
+  min-width: 190px;
   table-layout: fixed;
+}
+
+.player-shell .players-compact-table,
+.player-shell .player-transactions-section table {
+  width: 90%;
 }
 
 .players-compact-table th:first-child,
 .players-compact-table td:first-child {
-  width: 10ch;
-  max-width: 10ch;
+  width: auto;
+  max-width: 12ch;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .players-compact-table th:last-child,
 .players-compact-table td:last-child {
-  width: 76px;
-  max-width: 76px;
+  width: 88px;
+  max-width: 88px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 th,
@@ -1298,11 +1316,19 @@ tr:last-child td {
   }
 }
 
-@media (max-width: 560px) {
+  @media (max-width: 560px) {
+  body {
+    background: var(--background);
+  }
+
   .shell,
   .auth-shell,
   .app-shell {
     width: min(100vw - 20px, 1180px);
+  }
+
+  .player-shell {
+    width: max(calc(100vw - 20px), calc(var(--table-min-width) + 32px));
   }
 
   .segmented {

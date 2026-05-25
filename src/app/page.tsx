@@ -1163,7 +1163,7 @@ function AdminReportsTable({ reloadKey }: { reloadKey: number }) {
           </div>
           {reportError && <p className="form-message">{reportError}</p>}
           <div className="table-wrap">
-            <table>
+            <table className="players-compact-table">
               <thead>
                 <tr>
                   <th>Game</th>
@@ -1526,7 +1526,6 @@ function TransactionsTable({
   return (
     <div className="player-transactions-section">
       <div className="section-title-row transaction-heading">
-        <h3>Transactions</h3>
         <label className="table-search">
           Search
           <div className="search-field">
