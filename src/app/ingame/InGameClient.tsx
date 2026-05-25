@@ -407,64 +407,64 @@ export default function InGameClient({ gameId }: { gameId: string }) {
               </div>
             </div>
 
-            <section className="bank-section bank-paper seat-otp-section">
-              <h3>Seat OTPs</h3>
-              <div className="table-wrap">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Country</th>
-                      <th>Player</th>
-                      <th>Status</th>
-                      <th>OTP</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {bankState.seatAssignments.length === 0 && (
+            <div className="ingame-seat-player-grid">
+              <section className="bank-section bank-paper seat-otp-section">
+                <h3>Seat OTPs</h3>
+                <div className="table-wrap">
+                  <table>
+                    <thead>
                       <tr>
-                        <td colSpan={4}>No seats found</td>
+                        <th>Country</th>
+                        <th>Player</th>
+                        <th>Status</th>
+                        <th>OTP</th>
                       </tr>
-                    )}
-                    {bankState.seatAssignments.map((seat) => {
-                      const showOtp = Boolean(visibleOtpByUserId[seat.userId]);
-                      return (
-                        <tr key={seat.userId}>
-                          <td>{seat.countryName}</td>
-                          <td>{seat.playerName || "-"}</td>
-                          <td>
-                            <span className={`status-badge ${seat.status === "active" ? "open" : seat.status}`}>
-                              {seat.status}
-                            </span>
-                          </td>
-                          <td>
-                            {seat.reclaimCode ? (
-                              <button
-                                className="ghost-button compact-button"
-                                type="button"
-                                onClick={() =>
-                                  setVisibleOtpByUserId((current) => ({
-                                    ...current,
-                                    [seat.userId]: !current[seat.userId]
-                                  }))
-                                }
-                              >
-                                {showOtp ? <EyeOff size={16} /> : <Eye size={16} />}
-                                {showOtp ? seat.reclaimCode : "Show OTP"}
-                              </button>
-                            ) : (
-                              "-"
-                            )}
-                          </td>
+                    </thead>
+                    <tbody>
+                      {bankState.seatAssignments.length === 0 && (
+                        <tr>
+                          <td colSpan={4}>No seats found</td>
                         </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            </section>
+                      )}
+                      {bankState.seatAssignments.map((seat) => {
+                        const showOtp = Boolean(visibleOtpByUserId[seat.userId]);
+                        return (
+                          <tr key={seat.userId}>
+                            <td>{seat.countryName}</td>
+                            <td>{seat.playerName || "-"}</td>
+                            <td>
+                              <span className={`status-badge ${seat.status === "active" ? "open" : seat.status}`}>
+                                {seat.status}
+                              </span>
+                            </td>
+                            <td>
+                              {seat.reclaimCode ? (
+                                <button
+                                  className="ghost-button compact-button"
+                                  type="button"
+                                  onClick={() =>
+                                    setVisibleOtpByUserId((current) => ({
+                                      ...current,
+                                      [seat.userId]: !current[seat.userId]
+                                    }))
+                                  }
+                                >
+                                  {showOtp ? <EyeOff size={16} /> : <Eye size={16} />}
+                                  {showOtp ? seat.reclaimCode : "Show OTP"}
+                                </button>
+                              ) : (
+                                "-"
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
 
-            <div className="table-grid ingame-table-grid">
-              <div>
+              <section className="bank-section bank-paper">
                 <h3>Players</h3>
                 <div className="table-wrap">
                   <table className="players-compact-table">
@@ -486,15 +486,15 @@ export default function InGameClient({ gameId }: { gameId: string }) {
                     </tbody>
                   </table>
                 </div>
-              </div>
-              <TransactionsTable
-                transactions={bankState.transactions}
-                currentUserId={bankState.game.bank.userId}
-                actionBusy={busy}
-                onApprovePending={approvePendingTransaction}
-                onDenyPending={denyPendingTransaction}
-              />
+              </section>
             </div>
+            <TransactionsTable
+              transactions={bankState.transactions}
+              currentUserId={bankState.game.bank.userId}
+              actionBusy={busy}
+              onApprovePending={approvePendingTransaction}
+              onDenyPending={denyPendingTransaction}
+            />
           </>
         )}
       </section>
@@ -552,7 +552,7 @@ function TransactionsTable({
   );
 
   return (
-    <div>
+    <div className="ingame-transactions-section">
       <div className="section-title-row transaction-heading">
         <h3>Transactions</h3>
         <label className="table-search">

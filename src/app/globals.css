@@ -1110,6 +1110,17 @@ select:focus {
   grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
 }
 
+.ingame-seat-player-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.ingame-transactions-section {
+  margin-top: 12px;
+}
+
 .bank-section {
   min-width: 0;
 }
@@ -1134,10 +1145,6 @@ select:focus {
 
 .bank-paper h3 {
   color: var(--teal-dark);
-}
-
-.seat-otp-section {
-  margin-top: 12px;
 }
 
 .notice {
@@ -1273,6 +1280,7 @@ tr:last-child td {
   .dashboard-grid,
   .dashboard-toolbar,
   .bank-grid,
+  .ingame-seat-player-grid,
   .table-grid,
   .form-grid,
   .admin-game-tools {
